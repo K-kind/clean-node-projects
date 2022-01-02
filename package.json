@@ -14,5 +14,8 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/K-kind/clean-node-projects.git"
+  },
+  "devDependencies": {
+    "typescript": "^4.5.4"
   }
 }
