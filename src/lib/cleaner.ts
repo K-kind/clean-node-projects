@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import fastFolderSizeSync from 'fast-folder-size/sync';
 
 import { toFormattedRows, Directory } from './format-rows';
 import { selectDirs, Choice } from './propmt';
+import { readdirSync, rmdirSync, calcDirSizeSync } from '../utils/file';
 
 type Options = {
   logger?: (message: unknown) => void;
@@ -60,13 +60,7 @@ export class Cleaner {
 
   private scanRecursively = (relativePath: string, results: string[]) => {
     const fullPath = path.join(this.rootPath, relativePath);
-    let dirents;
-    try {
-      dirents = fs.readdirSync(fullPath, { withFileTypes: true });
-    } catch (e) {
-      this.logger(e); // TODO: error
-      return;
-    }
+    const dirents = readdirSync(fullPath, { withFileTypes: true });
 
     for (const dirent of dirents) {
       if (!dirent.isDirectory()) continue;
@@ -83,14 +77,11 @@ export class Cleaner {
   private calcDirData = (dirPaths: string[]) => {
     return dirPaths.map<Directory>((dirPath) => {
       const fullPath = path.join(this.rootPath, dirPath);
-      const lastAccessedAt = fs.statSync(fullPath).atime;
-      const bytes = fastFolderSizeSync(fullPath) as number; // TODO:
-      const megaBytes = Math.floor(bytes / 1024 / 1024);
 
       return {
         path: dirPath,
-        lastAccessedAt: lastAccessedAt.toLocaleDateString(),
-        megaBytes
+        lastAccessedAt: fs.statSync(fullPath).atime.toLocaleDateString(),
+        megaBytes: calcDirSizeSync(fullPath)
       };
     });
   };
@@ -114,12 +105,8 @@ export class Cleaner {
     const removedDirs = [];
     for (const dir of dirs) {
       const fullPath = path.join(this.rootPath, dir.path);
-      try {
-        fs.rmdirSync(fullPath, { recursive: true });
-        removedDirs.push(dir);
-      } catch (e) {
-        this.logger(e); // TODO: error
-      }
+      const removed = rmdirSync(fullPath, { recursive: true });
+      removed && removedDirs.push(dir);
     }
     return removedDirs;
   };
