@@ -8,8 +8,8 @@ export const readdirSync = (
   try {
     return fs.readdirSync(path, options);
   } catch (e) {
-    if (isErrnoException(e) && e.code === 'EACCES') {
-      console.log(`Permission denied for ${path}`);
+    if (e instanceof Error) {
+      console.log(e.message);
     } else {
       console.log(e);
     }
@@ -27,17 +27,14 @@ export const rmdirSync = (path: string, options: fs.RmOptions = {}) => {
     adapter.rmdirSync(path, options);
     return true;
   } catch (e) {
-    if (isErrnoException(e) && e.code === 'EACCES') {
-      console.log(`Permission denied for ${path}`);
+    // TODO: No error is thrown even when file access is denied and file removal is failed.
+    if (e instanceof Error) {
+      console.log(e.message);
     } else {
       console.log(e);
     }
     return false;
   }
-};
-
-const isErrnoException = (e: unknown): e is NodeJS.ErrnoException => {
-  return e instanceof Error && 'code' in e;
 };
 
 /** @returns entire size of a directory (MB) */

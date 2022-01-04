@@ -89,7 +89,9 @@ export class Cleaner {
   private formatAndSelect = (dirs: Directory[]) => {
     const { header, rows } = toFormattedRows(dirs);
     if (rows.length !== dirs.length) {
-      throw new Error('Something went wrong when formatting rows.');
+      throw new Error(
+        'Something went wrong when formatting rows.\nOperation was canceled (No folders were removed).'
+      );
     }
 
     const choices = dirs.map<Choice<Directory>>((dir, index) => ({
