@@ -10,5 +10,5 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   rules: {},
-  ignorePatterns: ['/dist/**']
+  ignorePatterns: ['/dist/**', '/bin/**']
 };

@@ -7,6 +7,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && rollup -c",
+    "test-run": "npm run build && ./bin/clean-node-projects",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
