@@ -8,7 +8,7 @@ export const cli = async (rawArgv: string[]) => {
   const cleaner = new Cleaner({
     rootPathArg: argv._[0]?.toString(),
     targetDirs: argv.target,
-    showSize: !argv.fast
+    showSize: !argv.quick
   });
 
   await cleaner.execute();
@@ -24,8 +24,8 @@ const parseArgs = (rawArgv: string[]) => {
       type: 'array',
       default: Cleaner.DEFAULT_TARGETS
     })
-    .option('fast', {
-      alias: 'f',
+    .option('quick', {
+      alias: 'q',
       description: 'Do not calculate size',
       type: 'boolean'
     })

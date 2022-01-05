@@ -3,7 +3,7 @@ import columnify from 'columnify';
 export type Directory = {
   path: string;
   lastAccessedAt: string;
-  megaBytes: number;
+  megaBytes?: number;
 };
 
 export const toFormattedRows = (directories: Directory[]) => {

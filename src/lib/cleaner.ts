@@ -89,11 +89,14 @@ export class Cleaner {
   private calcDirData = (dirPaths: string[]) => {
     return dirPaths.map<Directory>((dirPath) => {
       const fullPath = path.join(this.rootPath, dirPath);
+      const sizeInfo = this.showSize
+        ? { megaBytes: calcDirSizeSync(fullPath) }
+        : {};
 
       return {
         path: dirPath,
         lastAccessedAt: fs.statSync(fullPath).atime.toLocaleDateString(),
-        megaBytes: calcDirSizeSync(fullPath)
+        ...sizeInfo
       };
     });
   };
@@ -128,10 +131,14 @@ export class Cleaner {
   private showResult = (removedDirs: Directory[]) => {
     const [totalCount, totalSize] = removedDirs.reduce(
       ([count, size], dir) => {
-        return [++count, size + dir.megaBytes];
+        return [count + 1, size + (dir.megaBytes ?? 0)];
       },
       [0, 0]
     );
-    this.logger(`${totalCount} folders (${totalSize}MB) were removed.`);
+    if (this.showSize) {
+      this.logger(`${totalCount} folders (${totalSize}MB) were removed.`);
+    } else {
+      this.logger(`${totalCount} folders were removed.`);
+    }
   };
 }
