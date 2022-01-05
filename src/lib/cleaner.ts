@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { format } from 'date-fns';
 
 import { toFormattedRows, Directory } from './format-rows';
 import { selectDirs, Choice } from './propmt';
@@ -95,7 +96,7 @@ export class Cleaner {
 
       return {
         path: dirPath,
-        lastAccessedAt: fs.statSync(fullPath).atime.toLocaleDateString(),
+        lastAccessedAt: format(fs.statSync(fullPath).atime, 'yyyy/MM/dd'),
         ...sizeInfo
       };
     });

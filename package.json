@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "columnify": "^1.5.4",
+    "date-fns": "^2.28.0",
     "fast-folder-size": "^1.6.1",
     "inquirer": "^8.2.0",
     "yargs": "^17.3.1"
