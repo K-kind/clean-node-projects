@@ -8,6 +8,8 @@ import { readdirSync, rmdirSync, calcDirSizeSync } from '../utils/file';
 type Options = {
   logger?: (message: unknown) => void;
   rootPathArg?: string;
+  targetDirs?: string[];
+  showSize?: boolean;
 };
 
 export class Cleaner {
@@ -16,11 +18,18 @@ export class Cleaner {
   private logger: NonNullable<Options['logger']>;
   private rootPath: string;
   private targetDirs: string[];
+  private showSize: boolean;
 
-  constructor({ logger = console.log, rootPathArg }: Options = {}) {
+  constructor({
+    logger = console.log,
+    rootPathArg,
+    targetDirs,
+    showSize
+  }: Options = {}) {
     this.logger = logger;
     this.rootPath = this.toRootPath(rootPathArg);
-    this.targetDirs = Cleaner.DEFAULT_TARGETS;
+    this.targetDirs = targetDirs ?? Cleaner.DEFAULT_TARGETS;
+    this.showSize = showSize ?? true;
   }
 
   public execute = async () => {
