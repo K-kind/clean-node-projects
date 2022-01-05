@@ -47,6 +47,8 @@ export class Cleaner {
       this.logger('No folders were selected.');
       return;
     }
+
+    this.logger('Removing selected folders …');
     const removedDirs = this.removeDirs(selectedDirs);
     this.showResult(removedDirs);
   };
