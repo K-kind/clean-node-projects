@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "description": "Select and delete unused folders from stale node projects.",
   "main": "dist/cli.js",
-  "bin": {},
+  "files": [
+    "dist"
+  ],
+  "bin": {
+    "clean-node-projects": "bin/clean-node-projects"
+  },
   "scripts": {
     "clean": "rimraf dist",
     "build": "npm run clean && rollup -c",
