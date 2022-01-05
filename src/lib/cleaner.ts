@@ -53,9 +53,7 @@ export class Cleaner {
   private toRootPath = (pathArg?: string) => {
     if (!pathArg) return process.cwd();
 
-    // remove trailing slash
-    const { dir, base } = path.parse(pathArg);
-    return path.join(dir, base);
+    return path.resolve(pathArg); // absolute path
   };
 
   private findDirPaths = () => {

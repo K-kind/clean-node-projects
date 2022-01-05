@@ -6,7 +6,7 @@ export const cli = async (rawArgv: string[]) => {
   const argv = parseArgs(rawArgv);
 
   const cleaner = new Cleaner({
-    rootPathArg: argv._[0] as string,
+    rootPathArg: argv._[0]?.toString(),
     targetDirs: argv.target,
     showSize: !argv.fast
   });
