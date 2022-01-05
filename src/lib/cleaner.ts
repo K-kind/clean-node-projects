@@ -57,8 +57,13 @@ export class Cleaner {
   };
 
   private findDirPaths = () => {
-    const stat = fs.statSync(this.rootPath);
-    if (!stat.isDirectory()) return [];
+    try {
+      const stat = fs.statSync(this.rootPath);
+      if (!stat.isDirectory()) return [];
+    } catch (e) {
+      this.logger(e instanceof Error ? e.message : e);
+      return [];
+    }
 
     const dirPaths: string[] = [];
     this.scanRecursively('', dirPaths);
