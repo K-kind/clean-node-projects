@@ -31,18 +31,20 @@
     "@types/yargs": "^17.0.8",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
+    "columnify": "^1.5.4",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
+    "fast-folder-size": "^1.6.1",
     "prettier": "^2.5.1",
     "rimraf": "^3.0.2",
     "rollup": "^2.62.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.1",
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "columnify": "^1.5.4",
-    "fast-folder-size": "^1.6.1",
     "inquirer": "^8.2.0",
     "yargs": "^17.3.1"
   }

@@ -1,10 +1,11 @@
 import { terser } from 'rollup-plugin-terser';
 import typescript from 'rollup-plugin-typescript2';
+import nodeResolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
 import packageJson from './package.json';
 
 const globals = {
-  ...packageJson.dependencies,
-  ...packageJson.devDependencies
+  ...packageJson.dependencies
 };
 
 export default {
@@ -15,6 +16,6 @@ export default {
       format: 'cjs'
     }
   ],
-  plugins: [terser(), typescript()],
+  plugins: [commonjs(), nodeResolve(), terser(), typescript()],
   external: Object.keys(globals)
 };
