@@ -1,5 +1,4 @@
 import yargs from 'yargs';
-import { hideBin } from 'yargs/helpers';
 import { Cleaner } from './lib/cleaner';
 
 export const cli = async (rawArgv: string[]) => {
@@ -15,7 +14,7 @@ export const cli = async (rawArgv: string[]) => {
 };
 
 const parseArgs = (rawArgv: string[]) => {
-  const slicedArgs = hideBin(rawArgv);
+  const slicedArgs = rawArgv.slice(2);
   return yargs(slicedArgs)
     .usage('Usage: $0 [path] [options]')
     .option('target', {
