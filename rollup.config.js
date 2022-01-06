@@ -4,9 +4,16 @@ import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import packageJson from './package.json';
 
+const isProd = process.env.NODE_ENV === 'production';
+
 const globals = {
   ...packageJson.dependencies
 };
+
+const plugins = [
+  ...(isProd ? [commonjs(), nodeResolve(), terser()] : []),
+  typescript()
+];
 
 export default {
   input: 'src/cli.ts',
@@ -16,6 +23,6 @@ export default {
       format: 'cjs'
     }
   ],
-  plugins: [commonjs(), nodeResolve(), terser(), typescript()],
+  plugins,
   external: Object.keys(globals)
 };
