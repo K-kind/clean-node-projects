@@ -1,10 +1,10 @@
 import fs from 'fs';
 import path from 'path';
-import { format } from 'date-fns';
 
 import { toFormattedRows, Directory } from './format-rows';
 import { selectDirs, Choice } from './propmt';
 import { readdirSync, rmdirSync, calcDirSizeSync } from '../utils/file';
+import { formatDate } from '../utils/date';
 
 type Options = {
   logger?: (message: unknown) => void;
@@ -98,7 +98,7 @@ export class Cleaner {
 
       return {
         path: dirPath,
-        lastAccessedAt: format(fs.statSync(fullPath).atime, 'yyyy/MM/dd'),
+        lastAccessedAt: formatDate(fs.statSync(fullPath).atime),
         ...sizeInfo
       };
     });
