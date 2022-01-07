@@ -1,6 +1,6 @@
 {
   "name": "clean-node-projects",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Select and delete unused folders from stale node projects.",
   "main": "dist/cli.js",
   "files": [
