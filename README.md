@@ -2,7 +2,7 @@
 
 CLI package to find and delete unused folders such as `node_modules`, `dist`.
 
-https://user-images.githubusercontent.com/55728594/148562502-adfd3282-c8dc-4bdc-bd3f-0df8b7c7b8de.mov
+![clean-node-projects_demo](https://user-images.githubusercontent.com/55728594/148563707-15527242-aa5a-49c6-b09a-ac50fb0a3c89.gif)
 
 ## Requirement
 
